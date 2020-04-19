@@ -144,6 +144,9 @@
   <ItemGroup>
     <ClInclude Include="lexicalAnalyzer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\实验要求.docx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
