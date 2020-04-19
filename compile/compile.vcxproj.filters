@@ -18,6 +18,9 @@
     <ClCompile Include="lexicalTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="lexicalAnalyzer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lexicalAnalyzer.h">

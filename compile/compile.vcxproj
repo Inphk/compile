@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lexicalAnalyzer.cpp" />
     <ClCompile Include="lexicalTest.cpp" />
   </ItemGroup>
   <ItemGroup>
