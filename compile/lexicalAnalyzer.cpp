@@ -10,30 +10,38 @@ const string ClexicalAnalyzer::reservedWord[WORDNUM] = { "","if","else","for","w
 
 void ClexicalAnalyzer::outPutInfo()		//Êä³ö¸÷±íµÄÐÅÏ¢µ½ÆÁÄ»ºÍÎÄ¼þÖÐ
 {
-	ofstream fout("info.txt", std::ios::out);
+	ofstream fout("info.txt");
+	if (!fout.is_open())
+		cout << "ÏòÎÄ¼þÐ´ÈëÊ§°Ü" << endl;
 	cout << "Ô´³ÌÐò£º" << endl;
+	fout << "Ô´³ÌÐò£º" << endl;
 	for (unsigned int i = 0; i < text.size(); i++)
+	{
 		cout << i << '\t' << text[i];
+		fout << i << '\t' << text[i];
+	}
 	cout << "\n" << endl;
 	cout << "token±í£º" << endl;
 	fout << "token±í£º" << endl;
 	for (unsigned int i = 0; i < tokenTable.size(); i++)
 	{
-		cout << "Class:\t" << tokenTable[i].tokenClass << '\t';
+		cout << i << "\tClass:\t" << tokenTable[i].tokenClass << '\t';
+		fout << i << "\tClass:\t" << tokenTable[i].tokenClass << '\t';
 		if (-1 != tokenTable[i].address)
 		{
 			if (11 == tokenTable[i].tokenClass)
 			{
-				cout << "Address:name±í£º " << tokenTable[i].address << endl;
-				fout << "Address:name±í£º " << tokenTable[i].address << endl;
+				cout << "Address:name±í£º " << tokenTable[i].address;
+				fout << "Address:name±í£º " << tokenTable[i].address;
 			}
 			else if (12 == tokenTable[i].tokenClass)
 			{
-				cout << "Address:const±í£º " << tokenTable[i].address << endl;
-				fout << "Address:const±í£º " << tokenTable[i].address << endl;
+				cout << "Address:const±í£º " << tokenTable[i].address;
+				fout << "Address:const±í£º " << tokenTable[i].address;
 			}
 		}
-
+		cout << endl;
+		fout << endl;
 	}
 	cout << "\nname±í£º" << endl;
 	fout << "\nname±í£º" << endl;
@@ -49,6 +57,16 @@ void ClexicalAnalyzer::outPutInfo()		//Êä³ö¸÷±íµÄÐÅÏ¢µ½ÆÁÄ»ºÍÎÄ¼þÖÐ
 		cout << i << "\t" << constTable[i] << endl;
 		fout << i << "\t" << constTable[i] << endl;
 	}
+	cout << "\nerror±í£º" << endl;
+	fout << "\nerror±í£º" << endl;
+	if (errorTable.size() > 0)
+	{
+		for (unsigned int i = 0; i < errorTable.size(); i++)
+		{
+			cout << i << "\tµÚ" << errorTable[i].address << "ÐÐ£º\t" << errorTable[i].errorMessage << endl;
+			fout << i << "\tµÚ" << errorTable[i].address << "ÐÐ£º\t" << errorTable[i].errorMessage << endl;
+		}
+	}
 	fout.clear();
 	fout.close();
 }
@@ -61,12 +79,12 @@ int ClexicalAnalyzer::isReservedWord(string tokenStr)	//ÅÐ¶ÏÊÇ·ñÊÇ±£Áô×Ö,·µ»Ø±£Á
 	return 0;
 }
 
-bool ClexicalAnalyzer::isExist(string tokenStr)
+int ClexicalAnalyzer::isExist(string tokenStr)		//ÅÐ¶ÏÊÇ·ñÔÚ±êÊ¶·û±íÖÐ£¬·µ»ØÏÂ±ê
 {
 	for (unsigned int i = 0; i < nameTable.size(); i++)
 		if (nameTable[i].compare(tokenStr) == 0)
-			return true;
-	return false;
+			return i;
+	return -1;
 }
 
 void ClexicalAnalyzer::getToken()	//´Ó×Ô¶¯»úµÄÖÕÖ¹×´Ì¬»ñÈ¡¶ÔÓ¦×´Ì¬µÄtoken
@@ -86,10 +104,16 @@ void ClexicalAnalyzer::getToken()	//´Ó×Ô¶¯»úµÄÖÕÖ¹×´Ì¬»ñÈ¡¶ÔÓ¦×´Ì¬µÄtoken
 		}
 		else
 		{
-			if (!isExist(tokenStr))
+			int flag = isExist(tokenStr);
+			if (flag == -1)
 			{
 				nameTable.push_back(tokenStr);
 				token mtoken(11, nameTable.size() - 1);
+				tokenTable.push_back(mtoken);
+			}
+			else
+			{
+				token mtoken(11, flag);
 				tokenTable.push_back(mtoken);
 			}
 		}
@@ -103,43 +127,44 @@ void ClexicalAnalyzer::getToken()	//´Ó×Ô¶¯»úµÄÖÕÖ¹×´Ì¬»ñÈ¡¶ÔÓ¦×´Ì¬µÄtoken
 	{
 		constTable.push_back(tokenStr);
 		token mtoken(12, constTable.size() - 1);
+		tokenTable.push_back(mtoken);
 		break;
 	}
 	case 14:		// +
-	{token mtoken(13); break; }
+	{token mtoken(13); tokenTable.push_back(mtoken); break; }
 	case 16:		// -
-	{token mtoken(14); break; }
+	{token mtoken(14); tokenTable.push_back(mtoken); break; }
 	case 18:		// *
-	{token mtoken(15); break; }
+	{token mtoken(15); tokenTable.push_back(mtoken); break; }
 	case 20:		// /
-	{token mtoken(16); break; }
+	{token mtoken(16); tokenTable.push_back(mtoken); break; }
 	case 22:		// %
-	{token mtoken(17); break; }
+	{token mtoken(17); tokenTable.push_back(mtoken); break; }
 	case 24:		// >
-	{token mtoken(18); break; }
+	{token mtoken(18); tokenTable.push_back(mtoken); break; }
 	case 26:		// >=
-	{token mtoken(19); break; }
+	{token mtoken(19); tokenTable.push_back(mtoken); break; }
 	case 28:		// <
-	{token mtoken(20); break; }
+	{token mtoken(20); tokenTable.push_back(mtoken); break; }
 	case 30:		// <=
-	{token mtoken(21); break; }
+	{token mtoken(21); tokenTable.push_back(mtoken); break; }
 	case 32:		// =
-	{token mtoken(22); break; }
+	{token mtoken(28); tokenTable.push_back(mtoken); break; }
 	case 34:		// ==
-	{token mtoken(23); break; }
+	{token mtoken(23); tokenTable.push_back(mtoken); break; }
 	case 36:		// !
-	{token mtoken(24); break; }
+	{token mtoken(24); tokenTable.push_back(mtoken); break; }
 	case 38:		// !=
-	{token mtoken(25); break; }
+	{token mtoken(22); tokenTable.push_back(mtoken); break; }
 	case 41:		// &&
-	{token mtoken(26); break; }
+	{token mtoken(25); tokenTable.push_back(mtoken); break; }
 	case 44:		// ||
-	{token mtoken(27); break; }
-	case 46:		// , [ ] ( ) { } ; '\n'
-	{token mtoken(singleChClass(text[row].at(begin))); break; }
+	{token mtoken(26); tokenTable.push_back(mtoken); break; }
+	case 45:		// , [ ] ( ) { } ; '\n'
+	{token mtoken(singleChClass(text[row].at(begin))); tokenTable.push_back(mtoken); break; }
 	}
 	begin = list;
-	list--;
+	status = 0;
 }
 
 void ClexicalAnalyzer::getErrorToken()		//³ö´í´¦Àí
@@ -154,12 +179,12 @@ void ClexicalAnalyzer::getErrorToken()		//³ö´í´¦Àí
 	{
 		//´íÎóÐÅÏ¢ÊÕ¼¯
 		string message = "ÆÚÍû ";
-		message.insert(message.end(), text[row].at(list - 1));
+		message.insert(message.end(), text[row].at(list));
 		message.append(" ÊÇÊý×Ö");
 		errorToken etoken(message, row);
+		errorTable.push_back(etoken);
 
 		//ÏòºóÊ¶±ðÖ±µ½ÕýÈ·×Ö·û
-		list--;
 		while (kindOfChar(text[row].at(list)) == 2)
 			list++;
 	}
@@ -186,8 +211,8 @@ void ClexicalAnalyzer::getErrorToken()		//³ö´í´¦Àí
 		errorToken etoken("ÎÞ·¨Ê¶±ðµ¥¸ö|", row);
 		errorTable.push_back(etoken);
 	}
+	begin = list;
 	status = 0;
-	list--;
 }
 
 void ClexicalAnalyzer::move(char ch)	//¸Ãº¯Êý°üº¬×Ô¶¯»úÃ¿¸ö×´Ì¬¸Ã×öµÄÊÂÇéÒÔ¼°ÏÂÒ»²½¸Ã×ª±äµÄ×´Ì¬
@@ -204,7 +229,7 @@ void ClexicalAnalyzer::move(char ch)	//¸Ãº¯Êý°üº¬×Ô¶¯»úÃ¿¸ö×´Ì¬¸Ã×öµÄÊÂÇéÒÔ¼°ÏÂÒ
 		case 0:
 			switch (kindOfChar(ch))
 			{
-			case 1: break;
+			case 1: begin++; break;
 			case 0: status = 11; break;
 			case 2: status = 1; break;
 			case 3: status = 3; break;
@@ -219,102 +244,145 @@ void ClexicalAnalyzer::move(char ch)	//¸Ãº¯Êý°üº¬×Ô¶¯»úÃ¿¸ö×´Ì¬¸Ã×öµÄÊÂÇéÒÔ¼°ÏÂÒ
 			case 13: status = 35; break;
 			case 14: status = 39; break;
 			case 15: status = 42; break;
-			case 16: status = 45; break;
+			case 16: 
+				status = 45;
+				if (ch == '\n')
+					getToken();
+				break;
 			default: status = 47; break;
 			}
+				list++;
 			break;
 		case 1:
 			if (kindOfChar(ch) != 2 && kindOfChar(ch) != 3 && kindOfChar(ch) != 0)
 				status = 2;
+			else
+				list++;
 			break;
-		case 2:	getToken(); status = 0; break;	//±êÊ¶·û»ò±£Áô×Ö
+		case 2:	getToken(); break;	//±êÊ¶·û»ò±£Áô×Ö
 		case 3:
-			if (kindOfChar(ch) == 4)
+			if (kindOfChar(ch) == 0 || kindOfChar(ch) == 3)
+				list++;
+			else if (kindOfChar(ch) == 4)
+			{
 				status = 5;
+				list++;
+			}
 			else if (kindOfChar(ch) == 2)
 			{
 				errorStatus = 3;
 				status = -1;
 			}
-			else if (kindOfChar(ch) != 0 && kindOfChar(ch) != 3)
+			else
 				status = 4;
 			break;
-		case 4:	getToken(); status = 0; break;	//ÕýÕûÊý
+		case 4:	getToken(); break;	//ÕýÕûÊý
 		case 5:
 			if (ch == 'E' || ch == 'e')
+			{
 				status = 7;
+				list++;
+			}
 			else if (kindOfChar(ch) != 0 && kindOfChar(ch) != 3)
 				status = 6;
+			else
+				list++;
 			break;
-		case 6:	getToken(); status = 0; break;	//Ð¡Êý¸¡µã
+		case 6:	getToken(); break;	//Ð¡Êý¸¡µã
 		case 7:
 			if (ch == '+' || ch == '-')
-				status = 9;
-			else if (kindOfChar(ch) != 0 && kindOfChar(ch) != 3)
-				status = 8;
-			else
 			{
-				errorStatus = 7;
-				status = -1;
+				status = 9;
+				list++;
 			}
+			else if (kindOfChar(ch) != 0 && kindOfChar(ch) != 3)
+			{
+				if (text[row].at(list - 1) == 'E' || text[row].at(list - 1) == 'e')
+				{
+					errorStatus = 7;
+					status = -1;
+				}
+				else
+					status = 8;
+			}
+			else
+				list++;
+			
 			break;
-		case 8:	getToken(); status = 0; break;	//¿ÆÑ§¸¡µã
+		case 8:	getToken(); break;	//¿ÆÑ§¸¡µã
 		case 9:
 			if (kindOfChar(ch) != 2 && kindOfChar(ch) != 3 && kindOfChar(ch) != 0)
 				status = 10;
+			else
+				list++;
 			break;
-		case 10: getToken(); status = 0; break;	//¿ÆÑ§¸¡µã
+		case 10: getToken(); break;	//¿ÆÑ§¸¡µã
 		case 11: status = 12; break;
-		case 12: getToken(); status = 0; break;	//Áã
+		case 12: getToken(); break;	//Áã
 		case 13: status = 14; break;
-		case 14: getToken(); status = 0; break;	// +
+		case 14: getToken(); break;	// +
 		case 15: status = 16; break;
-		case 16: getToken(); status = 0; break;	// -
+		case 16: getToken(); break;	// -
 		case 17: status = 18; break;
-		case 18: getToken(); status = 0; break;	// *
+		case 18: getToken(); break;	// *
 		case 19: status = 20; break;
-		case 20: getToken(); status = 0; break;	// /
+		case 20: getToken(); break;	// /
 		case 21: status = 22; break;
-		case 22: getToken(); status = 0; break;	// %
+		case 22: getToken(); break;	// %
 		case 23:
-			if (kindOfChar(ch) != 12)
-				status = 24;
-			else
+			if (kindOfChar(ch) == 12)
+			{
 				status = 25;
+				list++;
+			}
+			else
+				status = 24;
 			break;
-		case 24: getToken(); status = 0; break;	// >
+		case 24: getToken(); break;	// >
 		case 25: status = 26; break;
-		case 26: getToken(); status = 0; break;	// >=
+		case 26: getToken(); break;	// >=
 		case 27:
-			if (kindOfChar(ch) != 12)
-				status = 28;
-			else
+			if (kindOfChar(ch) == 12)
+			{
 				status = 29;
+				list++;
+			}
+			else
+				status = 28;
 			break;
-		case 28: getToken(); status = 0; break;	// <
+		case 28: getToken(); break;	// <
 		case 29: status = 30; break;
-		case 30: getToken(); status = 0; break;	// <=
+		case 30: getToken(); break;	// <=
 		case 31:
-			if (kindOfChar(ch) != 12)
-				status = 32;
-			else
+			if (kindOfChar(ch) == 12)
+			{
 				status = 33;
-			break;
-		case 32: getToken(); status = 0; break;	// =
-		case 33: status = 34; break;
-		case 34: getToken(); status = 0; break;	// ==
-		case 35:
-			if (kindOfChar(ch) != 12)
-				status = 36;
+				list++;
+			}
 			else
-				status = 37;
+				status = 32;
 			break;
-		case 36: getToken(); status = 0; break;	// !
+		case 32: getToken(); break;	// =
+		case 33: status = 34;break;
+		case 34: getToken(); break;	// ==
+		case 35:
+			if (kindOfChar(ch) == 12)
+			{
+				status = 37;
+				list++;
+			}
+			else
+				status = 36;
+			break;
+		case 36: getToken(); break;	// !
 		case 37: status = 38; break;
-		case 38: getToken(); status = 0; break;	// !=
+		case 38: getToken(); break;	// !=
 		case 39:
 			if (kindOfChar(ch) == 14)
+			{
 				status = 40;
+				list++;
+			}
 			else
 			{
 				errorStatus = 39;
@@ -322,10 +390,13 @@ void ClexicalAnalyzer::move(char ch)	//¸Ãº¯Êý°üº¬×Ô¶¯»úÃ¿¸ö×´Ì¬¸Ã×öµÄÊÂÇéÒÔ¼°ÏÂÒ
 			}
 			break;
 		case 40: status = 41; break;
-		case 41: getToken(); status = 0; break;	// &&
+		case 41: getToken(); break;	// &&
 		case 42:
 			if (kindOfChar(ch) == 15)
+			{
 				status = 43;
+				list++;
+			}
 			else
 			{
 				errorStatus = 42;
@@ -333,9 +404,8 @@ void ClexicalAnalyzer::move(char ch)	//¸Ãº¯Êý°üº¬×Ô¶¯»úÃ¿¸ö×´Ì¬¸Ã×öµÄÊÂÇéÒÔ¼°ÏÂÒ
 			}
 			break;
 		case 43: status = 44; break;
-		case 44: getToken(); status = 0; break;	// ||
-		case 45: status = 46; break;
-		case 46: getToken(); status = 0; break;	// , [ ] ( ) { } ; '\n' 'EOF' 
+		case 44: getToken(); break;	// ||
+		case 45: getToken(); break;	// , [ ] ( ) { } ; '\n' 'EOF' 
 		default: getErrorToken(); break;		//´íÎó´¦Àí
 		}
 	}
@@ -345,13 +415,12 @@ void ClexicalAnalyzer::lexicalDFA()			//´Ê·¨·ÖÎö×Ô¶¯»ú
 {
 	for (row = 0; row < text.size(); row++)
 	{
-		begin = 0;
-		for (list = 0; list < text[row].size(); list++)
+		status = begin = list = 0;
+		while (list < text[row].size())
 		{
-			if (text[row].at(list) == '\r')
-				;
-			else
-				move(text[row].at(list));
+			move(text[row].at(list));
+			if(list<text[row].size())
+				cout << text[row].at(list) << " ";
 		}
 	}
 	tokenTable.push_back(token(38));
@@ -361,9 +430,18 @@ void ClexicalAnalyzer::lexicalDFA()			//´Ê·¨·ÖÎö×Ô¶¯»ú
 void ClexicalAnalyzer::initText()	//´ÓÎÄ¼þÖÐ¶ÁÈ¡ÄÚÈÝ
 {
 	ifstream fin("data.txt", std::ios::in);
-	char oneText[MAX];
-	while (fin.get(oneText, MAX))
-		text.push_back(oneText);
+	if (fin.is_open())
+	{
+		char oneText[MAX];
+		while (fin.getline(oneText, MAX))
+		{
+			string str(oneText);
+			str.insert(str.end(),'\n');
+			text.push_back(str);
+		}
+	}
+	else
+		cout << "ÎÄ¼þ¶ÁÈ¡Ê§°Ü£¡";
 	fin.clear();
 	fin.close();
 }
@@ -394,6 +472,8 @@ int ClexicalAnalyzer::kindOfChar(char ch)	//½«×Ö·û°´»®Îª²»Í¬µÄÖÖÀà£¬×Ô¶¯»ú½«¸ù¾Ý
 		ch = 3;
 	else if (singleChClass(ch))
 		ch = 16;
+	else if (ch == ' ' || ch == '\t')
+		ch = ' ';
 	switch (ch)
 	{
 	case '0': return 0;

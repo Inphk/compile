@@ -56,7 +56,7 @@ private:
 	void initText();
 	void outPutInfo();
 	int isReservedWord(string tokenStr);
-	bool isExist(string tokenStr);
+	int isExist(string tokenStr);
 	void getToken();
 	void getErrorToken();
 	void move(char ch);
