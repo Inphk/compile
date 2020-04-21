@@ -1,9 +1,9 @@
 源程序：
 0	int main()
 1	{
-2		int address, flag, array[10];
+2		int address, flag, array[10], @;
 3		flag = 1;
-4		address = 3k;
+4		address = 3kab;
 5		char ch;
 6		0&1;
 7		float a, b, c = 3.5;
@@ -44,136 +44,137 @@ token表：
 13	Class:	29	
 14	Class:	12	Address:const表： 0
 15	Class:	30	
-16	Class:	35	
-17	Class:	37	
-18	Class:	11	Address:name表： 2
-19	Class:	28	
-20	Class:	12	Address:const表： 1
-21	Class:	35	
-22	Class:	37	
-23	Class:	11	Address:name表： 1
-24	Class:	28	
-25	Class:	35	
-26	Class:	37	
-27	Class:	10	
-28	Class:	11	Address:name表： 4
-29	Class:	35	
-30	Class:	37	
-31	Class:	12	Address:const表： 2
-32	Class:	12	Address:const表： 3
-33	Class:	35	
-34	Class:	37	
-35	Class:	8	
-36	Class:	11	Address:name表： 5
-37	Class:	27	
-38	Class:	11	Address:name表： 6
-39	Class:	27	
-40	Class:	11	Address:name表： 7
-41	Class:	28	
-42	Class:	12	Address:const表： 4
-43	Class:	35	
-44	Class:	37	
-45	Class:	11	Address:name表： 5
-46	Class:	28	
-47	Class:	12	Address:const表： 5
-48	Class:	35	
-49	Class:	37	
-50	Class:	11	Address:name表： 6
-51	Class:	28	
-52	Class:	12	Address:const表： 6
-53	Class:	35	
-54	Class:	37	
-55	Class:	11	Address:name表： 5
-56	Class:	28	
-57	Class:	35	
-58	Class:	37	
-59	Class:	4	
-60	Class:	31	
-61	Class:	11	Address:name表： 2
-62	Class:	32	
-63	Class:	37	
-64	Class:	33	
-65	Class:	37	
-66	Class:	11	Address:name表： 3
-67	Class:	29	
-68	Class:	12	Address:const表： 7
-69	Class:	30	
-70	Class:	28	
-71	Class:	11	Address:name表： 5
-72	Class:	13	
-73	Class:	11	Address:name表： 6
-74	Class:	35	
-75	Class:	37	
-76	Class:	3	
-77	Class:	31	
-78	Class:	9	
-79	Class:	11	Address:name表： 8
-80	Class:	28	
-81	Class:	12	Address:const表： 8
-82	Class:	35	
-83	Class:	11	Address:name表： 8
-84	Class:	20	
-85	Class:	12	Address:const表： 9
-86	Class:	35	
-87	Class:	11	Address:name表： 8
-88	Class:	13	
+16	Class:	27	
+17	Class:	35	
+18	Class:	37	
+19	Class:	11	Address:name表： 2
+20	Class:	28	
+21	Class:	12	Address:const表： 1
+22	Class:	35	
+23	Class:	37	
+24	Class:	11	Address:name表： 1
+25	Class:	28	
+26	Class:	35	
+27	Class:	37	
+28	Class:	10	
+29	Class:	11	Address:name表： 4
+30	Class:	35	
+31	Class:	37	
+32	Class:	12	Address:const表： 2
+33	Class:	12	Address:const表： 3
+34	Class:	35	
+35	Class:	37	
+36	Class:	8	
+37	Class:	11	Address:name表： 5
+38	Class:	27	
+39	Class:	11	Address:name表： 6
+40	Class:	27	
+41	Class:	11	Address:name表： 7
+42	Class:	28	
+43	Class:	12	Address:const表： 4
+44	Class:	35	
+45	Class:	37	
+46	Class:	11	Address:name表： 5
+47	Class:	28	
+48	Class:	12	Address:const表： 5
+49	Class:	35	
+50	Class:	37	
+51	Class:	11	Address:name表： 6
+52	Class:	28	
+53	Class:	12	Address:const表： 6
+54	Class:	35	
+55	Class:	37	
+56	Class:	11	Address:name表： 5
+57	Class:	28	
+58	Class:	35	
+59	Class:	37	
+60	Class:	4	
+61	Class:	31	
+62	Class:	11	Address:name表： 2
+63	Class:	32	
+64	Class:	37	
+65	Class:	33	
+66	Class:	37	
+67	Class:	11	Address:name表： 3
+68	Class:	29	
+69	Class:	12	Address:const表： 7
+70	Class:	30	
+71	Class:	28	
+72	Class:	11	Address:name表： 5
+73	Class:	13	
+74	Class:	11	Address:name表： 6
+75	Class:	35	
+76	Class:	37	
+77	Class:	3	
+78	Class:	31	
+79	Class:	9	
+80	Class:	11	Address:name表： 8
+81	Class:	28	
+82	Class:	12	Address:const表： 8
+83	Class:	35	
+84	Class:	11	Address:name表： 8
+85	Class:	20	
+86	Class:	12	Address:const表： 9
+87	Class:	35	
+88	Class:	11	Address:name表： 8
 89	Class:	13	
-90	Class:	32	
-91	Class:	37	
-92	Class:	33	
-93	Class:	37	
-94	Class:	1	
-95	Class:	31	
-96	Class:	11	Address:name表： 8
-97	Class:	22	
-98	Class:	12	Address:const表： 10
-99	Class:	32	
-100	Class:	37	
-101	Class:	7	
-102	Class:	35	
-103	Class:	37	
-104	Class:	1	
-105	Class:	31	
-106	Class:	11	Address:name表： 8
-107	Class:	23	
-108	Class:	12	Address:const表： 11
-109	Class:	25	
-110	Class:	11	Address:name表： 2
-111	Class:	32	
-112	Class:	37	
-113	Class:	11	Address:name表： 2
-114	Class:	28	
-115	Class:	12	Address:const表： 12
-116	Class:	35	
-117	Class:	37	
-118	Class:	1	
-119	Class:	31	
-120	Class:	11	Address:name表： 8
-121	Class:	23	
-122	Class:	12	Address:const表： 13
-123	Class:	32	
-124	Class:	37	
-125	Class:	5	
-126	Class:	35	
-127	Class:	37	
-128	Class:	2	
-129	Class:	37	
-130	Class:	11	Address:name表： 2
-131	Class:	28	
-132	Class:	12	Address:const表： 14
-133	Class:	35	
-134	Class:	37	
-135	Class:	34	
-136	Class:	37	
-137	Class:	34	
-138	Class:	37	
-139	Class:	6	
-140	Class:	12	Address:const表： 15
-141	Class:	35	
-142	Class:	37	
-143	Class:	34	
-144	Class:	37	
-145	Class:	38	
+90	Class:	13	
+91	Class:	32	
+92	Class:	37	
+93	Class:	33	
+94	Class:	37	
+95	Class:	1	
+96	Class:	31	
+97	Class:	11	Address:name表： 8
+98	Class:	22	
+99	Class:	12	Address:const表： 10
+100	Class:	32	
+101	Class:	37	
+102	Class:	7	
+103	Class:	35	
+104	Class:	37	
+105	Class:	1	
+106	Class:	31	
+107	Class:	11	Address:name表： 8
+108	Class:	23	
+109	Class:	12	Address:const表： 11
+110	Class:	25	
+111	Class:	11	Address:name表： 2
+112	Class:	32	
+113	Class:	37	
+114	Class:	11	Address:name表： 2
+115	Class:	28	
+116	Class:	12	Address:const表： 12
+117	Class:	35	
+118	Class:	37	
+119	Class:	1	
+120	Class:	31	
+121	Class:	11	Address:name表： 8
+122	Class:	23	
+123	Class:	12	Address:const表： 13
+124	Class:	32	
+125	Class:	37	
+126	Class:	5	
+127	Class:	35	
+128	Class:	37	
+129	Class:	2	
+130	Class:	37	
+131	Class:	11	Address:name表： 2
+132	Class:	28	
+133	Class:	12	Address:const表： 14
+134	Class:	35	
+135	Class:	37	
+136	Class:	34	
+137	Class:	37	
+138	Class:	34	
+139	Class:	37	
+140	Class:	6	
+141	Class:	12	Address:const表： 15
+142	Class:	35	
+143	Class:	37	
+144	Class:	34	
+145	Class:	37	
+146	Class:	38	
 
 name表：
 0	main
@@ -205,6 +206,7 @@ const表：
 15	0
 
 error表：
-0	第4行：	期望 k 是数字
-1	第6行：	无法识别单个&
-2	第10行：	无法识别的数字表示
+0	第2行：	存在无法识别的字符
+1	第4行：	期望 k 是数字
+2	第6行：	无法识别单个&
+3	第10行：	无法识别的数字表示

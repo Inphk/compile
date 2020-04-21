@@ -49,8 +49,8 @@ private:
 	vector<token> tokenTable;
 	vector<errorToken> errorTable;
 	vector<string> text;
-	int status, errorStatus, begin;
-	unsigned int row, list;
+	int status, errorStatus;
+	unsigned int row, list, begin;
 	static const string reservedWord[WORDNUM];
 
 	void initText();

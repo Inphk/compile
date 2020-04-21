@@ -1,8 +1,8 @@
 int main()
 {
-	int address, flag, array[10];
+	int address, flag, array[10], @;
 	flag = 1;
-	address = 3k;
+	address = 3kab;
 	char ch;
 	0&1;
 	float a, b, c = 3.5;

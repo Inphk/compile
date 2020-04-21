@@ -221,6 +221,8 @@ void ClexicalAnalyzer::move(char ch)	//¸Ãº¯Êı°üº¬×Ô¶¯»úÃ¿¸ö×´Ì¬¸Ã×öµÄÊÂÇéÒÔ¼°ÏÂÒ
 	{
 		errorStatus = -1;
 		status = -1;
+		list++;
+		getErrorToken();
 	}
 	else
 	{
@@ -419,8 +421,8 @@ void ClexicalAnalyzer::lexicalDFA()			//´Ê·¨·ÖÎö×Ô¶¯»ú
 		while (list < text[row].size())
 		{
 			move(text[row].at(list));
-			if(list<text[row].size())
-				cout << text[row].at(list) << " ";
+			//if(list<text[row].size())
+			//	cout << text[row].at(list) << " ";
 		}
 	}
 	tokenTable.push_back(token(38));
