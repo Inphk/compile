@@ -21,9 +21,18 @@
     <ClCompile Include="lexicalAnalyzer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="lex_parTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lexicalAnalyzer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -31,9 +40,21 @@
     <None Include="..\实验要求.docx">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="..\分析表.xlsx">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="info.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Analysis.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="..\c语言LL（1） 文法.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

@@ -57,7 +57,7 @@ void ClexicalAnalyzer::outPutInfo()		//输出各表的信息到屏幕和文件中
 		cout << i << "\t" << constTable[i] << endl;
 		fout << i << "\t" << constTable[i] << endl;
 	}
-	cout << "\nerror表：" << endl;
+	cout << "\nerror：" << endl;
 	fout << "\nerror表：" << endl;
 	if (errorTable.size() > 0)
 	{

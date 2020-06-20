@@ -39,15 +39,14 @@ class ClexicalAnalyzer
 {
 public:
 	static const int MAX = 1024, WORDNUM = 11;
-
+	vector<token> tokenTable;
+	vector<string> nameTable;
+	vector<string> constTable;
+	vector<errorToken> errorTable;
 	ClexicalAnalyzer();
 	void lexicalDFA();
 
 private:
-	vector<string> nameTable;
-	vector<string> constTable;
-	vector<token> tokenTable;
-	vector<errorToken> errorTable;
 	vector<string> text;
 	int status, errorStatus;
 	unsigned int row, list, begin;

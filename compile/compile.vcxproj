@@ -140,15 +140,22 @@
   <ItemGroup>
     <ClCompile Include="lexicalAnalyzer.cpp" />
     <ClCompile Include="lexicalTest.cpp" />
+    <ClCompile Include="lex_parTest.cpp" />
+    <ClCompile Include="parser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lexicalAnalyzer.h" />
+    <ClInclude Include="parser.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\分析表.xlsx" />
     <None Include="..\实验要求.docx" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\c语言LL（1） 文法.txt" />
+    <Text Include="Analysis.txt" />
     <Text Include="data.txt" />
+    <Text Include="info.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
